@@ -6,6 +6,7 @@ import H2 from '../comonents/heading'
 import {  FieldValues, useForm, SubmitErrorHandler } from "react-hook-form";
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuthContext } from '../utils/AuthProvicder';
 
 type FormValues = {
     email: string;
@@ -18,9 +19,31 @@ type FormValues = {
 export default function page() {
 
   const {register, handleSubmit, formState : {errors, isSubmitting}, getValues, reset} = useForm();
+  const { setName, setUser } = useAuthContext();
   const onSubmit = async(data : FieldValues)=> {
        
+   try {
+     const res = await fetch("https://flight-server-six.vercel.app/api/register", {
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body : JSON.stringify(data)
+        });
+        const result = await res.json();
 
+        
+        if(!res.ok || !result.data.token){
+            throw new Error(result.message);
+        }
+        toast.success("Registration completed");
+        setName(data.name); setUser(true);
+        localStorage.setItem("token", result.data.token);
+
+    
+   } catch (err : any ) {
+        toast.error(err.message || "Something went wrong");
+   }
   }
 
   const onError : SubmitErrorHandler<FormValues> = async(errors) => {
@@ -35,11 +58,11 @@ export default function page() {
         </div>
         <div className=" bg-blue-800 min-h-[100vh]  w-full  flex items-center flex-col gap-4 justify-center ">
             <H2>Register Now</H2>
-            <form onSubmit={handleSubmit(onSubmit, onError)} className='w-full text-center flex flex-col items-center gap-y-4'>
+            <form onSubmit={handleSubmit(onSubmit, onError)} method="post" className='w-full text-center flex flex-col items-center gap-y-4'>
                 <input
                { ...register("name", {
                     required : "The name is required",
-                   
+                 
                     })
                 }
                 type="text"
@@ -65,6 +88,10 @@ export default function page() {
                 <input
                     { ...register("password", {
                             required : "The password is required",
+                            minLength : {
+                                value : 6,
+                                message : "Password must be at least 6 characters"
+                            }
                         })
                     }
                     type="password"
@@ -100,7 +127,9 @@ export default function page() {
 
                 <button
                 type="submit"
-                className="px-6 py-2 w-full max-w-[120px] rounded-full text-white text-black/70 border border-white hover:bg-white hover:text-blue-800 font-bold transition-all duration-200 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+                disabled ={isSubmitting}
+
+                className="px-6 py-2 w-full max-w-[120px] rounded-full text-white text-black/70 border border-white hover:bg-white hover:text-blue-800 font-bold transition-all duration-200 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-20"
                 > Register  </button>
             </form>
 

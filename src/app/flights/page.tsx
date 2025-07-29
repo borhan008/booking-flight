@@ -2,19 +2,26 @@ import Link from 'next/link';
 import React from 'react';
 import { FaPlaneDeparture, FaPlaneArrival, FaCalendarAlt, FaClock, FaDollarSign, FaChair } from "react-icons/fa";
 
-export default function Flights() {
-  const flight = {
-    airline: "Airways",
-    flight_number: "AW123",
-    origin: "New York",
-    destination: "London",
-    date: "2024-12-01",
-    time: "10:00 AM",
-    price: 500,
-    seats: ["1A", "1B", "1C", "2A", "2B"],
-  };
+type  TFlight = {
+  _id : string,
+  airline : string,
+  flight_number: string,
+  origin:string,
+  destination:string,
+  date:string,
+  time:string,
+  price:string,
+  seats : string[],
+}
+
+export default async function Flights() {
+  
+
+  const res = await fetch("https://flight-server-six.vercel.app/api/flights");
+ const flights = await res.json();
 
   return (
+    
     <main className="min-h-screen  ">
 
       <div className="border-b border-blue-800">
@@ -37,12 +44,11 @@ export default function Flights() {
       </header>
       </div>
 
-      {/* Flight Section */}
       <section className='max-w-7xl mx-auto py-16'>
         <h2 className="text-2xl font-semibold mb-4 text-center text-blue-800">All Flights</h2>
 
         <div className="flex flex-wrap gap-y-5 gap-x-4 justify-center w-full">
-            <div className="bg-white rounded-xl shadow-md max-w-[250px] w-full overflow-hidden pb-4">
+           {flights.data && flights.data.flights.map((flight : TFlight) =>   <div key={flight._id} className="bg-white rounded-xl shadow-md max-w-[250px] w-full overflow-hidden pb-4">
                 
 
                 <div className="bg-blue-800 text-white px-6 py-4 flex items-center justify-between">
@@ -95,8 +101,8 @@ export default function Flights() {
         </div>
            
 
-                <Link href="" className='border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition'>Book Now</Link>
-            </div>
+                <Link href={`book/${flight._id}`} className='border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition'>Book Now</Link>
+            </div>)} 
           
         </div>
       </section>

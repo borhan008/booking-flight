@@ -6,6 +6,7 @@ import H2 from '../comonents/heading'
 import {  FieldValues, useForm, SubmitErrorHandler } from "react-hook-form";
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuthContext } from '../utils/AuthProvicder';
 
 type FormValues = {
     email: string;
@@ -13,12 +14,32 @@ type FormValues = {
  };
 
 export default function page() {
-
-  const {register, handleSubmit, formState : {errors, isSubmitting}, getValues, reset} = useForm();
-  const onSubmit = async(data : FieldValues)=> {
+    const { setName, setUser } = useAuthContext();
+    const {register, handleSubmit, formState : {errors, isSubmitting}, getValues, reset} = useForm();
+    const onSubmit = async(data : FieldValues)=> {
+        try {
+            const res = await fetch("https://flight-server-six.vercel.app/api/login", {
+                   method : "POST",
+                   headers: {
+                       "Content-Type": "application/json",
+                     },
+                   body : JSON.stringify(data)
+               });
+               const result = await res.json();
        
-
-  }
+               
+               if(!res.ok || !result.data.token){
+                   throw new Error(result.message);
+               }
+               toast.success("Logged in successfully.");
+               setName(data.name); setUser(true);
+               localStorage.setItem("token", result.data.token);
+       
+           
+          } catch (err : any) {
+               toast.error(err.message || "Something went wrong");
+          }
+    }
 
   const onError : SubmitErrorHandler<FormValues> = async(errors) => {
     toast.error(errors?.email?.message || errors?.password?.message || "Something went wrong");
@@ -51,6 +72,10 @@ export default function page() {
                    <input
                     { ...register("password", {
                             required : "The password is required",
+                            minLength : {
+                                value : 6,
+                                message : "Password must be at least 6 characters"
+                            }
                         })
                     }
                 type="password"
