@@ -1,6 +1,6 @@
 # ✈️ FlyBook – Flight Booking App
 
-**FlyBook** is a modern flight booking web application built with **Next.js **, providing features for users to explore, book, and manage flights. Admin users can create, update, and delete bookings with route-level protection.
+**FlyBook** is a modern flight booking web application built with **Next.js**, providing features for users to explore, book, and manage flights. Admin users can create, update, and delete bookings with route-level protection.
 
 ## 🌐 Live Demo
 
