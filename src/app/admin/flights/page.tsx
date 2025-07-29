@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { FaPlaneDeparture, FaPlaneArrival } from "react-icons/fa";
 import { type TFlight } from "@/app/utils/types";
 
-export default function page() {
+export default function AdminFlights() {
   const [flights, setFlights] = useState([]);
   useEffect(() => {
     const fetchData = async () => {

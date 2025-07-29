@@ -17,7 +17,7 @@ type FormValues = {
   gender: "Male" | "Female";
 };
 
-export default function page() {
+export default function Register() {
   const {
     register,
     handleSubmit,

@@ -14,7 +14,7 @@ type FormValues = {
   password: string;
 };
 
-export default function page() {
+export default function Login() {
   const { setName, setUser } = useAuthContext();
   const {
     register,
