@@ -79,7 +79,7 @@ export default function BookASeat() {
 
       const seatBookData = await seatBook.json();
       if (seatBookData.ok) {
-        toast.success("Seat booked, wait 2 mins for confirmation.");
+        toast.success("Seat booked, confirm within 2 minutes.");
         setCountDown(true);
         setCounting(120);
       } else {
@@ -113,14 +113,25 @@ export default function BookASeat() {
     );
     const seatBookData = await seatBook.json();
     if (seatBookData.ok) {
-      toast.success("Seat confiemd");
+      setCountDown(false);
+      setCounting(0);
+      toast.success(seatBookData?.message || "Seat confiemd");
     } else {
-      toast.error("Something went wrong while confirming the seat.");
+      setCountDown(false);
+      setCounting(0);
+
+      toast.error(
+        seatBookData?.message ||
+          "Something went wrong while confirming the seat."
+      );
     }
   };
 
   useEffect(() => {
-    if (counting == 0) return;
+    if (counting == 0) {
+      setCountDown(false);
+      return;
+    }
     setTimeout(() => {
       setCounting(counting - 1);
     }, 1000);
@@ -132,17 +143,18 @@ export default function BookASeat() {
         <section className="max-w-xl mx-auto py-16  ">
           <div className="bg-white rounded-xl shadow-md max-w-lg w-full overflow-hidden py-12 border">
             {counting && (
-              <h2 className="text-black/80 text-2xl text-center mb-4">
-                Please wait {counting}s to confirm
-              </h2>
-            )}
-            {counting == 0 && (
-              <button
-                className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition"
-                onClick={handleConfirmSeat}
-              >
-                Confirm Seats
-              </button>
+              <div>
+                <h2 className="text-black/80 text-2xl text-center mb-4">
+                  Please confirm within {counting}s
+                </h2>
+
+                <button
+                  className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition"
+                  onClick={handleConfirmSeat}
+                >
+                  Confirm Seats
+                </button>
+              </div>
             )}
           </div>
         </section>

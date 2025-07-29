@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✈️ FlyBook – Flight Booking App
 
-## Getting Started
+**FlyBook** is a modern flight booking web application built with **Next.js **, providing features for users to explore, book, and manage flights. Admin users can create, update, and delete bookings with route-level protection.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌐 Live Demo
+
+🔗 [https://booking-flight-uuqr.vercel.app/](https://booking-flight-uuqr.vercel.app/)
+
+---
+
+## 🧰 Tech Stack
+
+- **Next.js 15+** (App Router)
+- **React Hook Form** – Form handling
+- **Tailwind CSS** – Styling
+- **React Toastify** – Notifications
+- **Vercel** – Deployment
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── admin/
+│   │   ├── book/
+│   │   └── flights/
+│   │       ├── add/
+│   │       ├── update/
+│   │       └── page.tsx
+│   ├── book/
+│   ├── components/
+│   │   ├── header.tsx
+│   │   ├── heading.tsx
+│   │   └── singleFlight.tsx
+│   ├── flights/
+│   ├── login/
+│   └── register/
+├── utils/
+│   ├── AuthProvider.tsx
+│   ├── types.ts
+│   └── utils.ts
+├── favicon.ico
+├── globals.css
+├── layout.tsx
+├── loading.js
+├── page.tsx
+└── middleware.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🧑‍💼 Authentication
 
-## Learn More
+- User Registration
+- User Login
+- Auth state via context
+- Token-based route protection
 
-To learn more about Next.js, take a look at the following resources:
+### ✈️ Flights
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Get all flights from API
+- Filter flights by origin/destination
+- View flight details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧾 Booking
 
-## Deploy on Vercel
+- Book available seats
+- Selecting seats
+- 2 minutes reservation lock
+- Confirm booking view
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🛠️ Admin Panel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Create new flights
+- Update flights
+- Manage all bookings
+
+---
+
+## ⚙️ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/borhan008/booking-flight
+
+# Navigate into the project
+cd flybook
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+---
+
+## 📌 API Server
+
+- The API [https://flight-server-six.vercel.app/](https://flight-server-six.vercel.app/)
+- The API [documentation](https://documenter.getpostman.com/view/18671311/2sAYBYfAGi#64ebab8d-7177-4781-9b73-22379d9cafa6)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
