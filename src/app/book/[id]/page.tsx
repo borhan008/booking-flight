@@ -87,11 +87,12 @@ export default function BookASeat() {
           seatBookData.message || "Something went wrong while booking the seat."
         );
       }
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        error.message || "Something went wrong while booking the seat."
-      );
+    } catch (err: unknown) {
+      if (err && typeof err === "object" && "message" in err) {
+        toast.error((err as { message: string }).message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 
