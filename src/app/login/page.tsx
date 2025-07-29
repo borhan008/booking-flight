@@ -114,7 +114,8 @@ export default function Login() {
           />
           <button
             type="submit"
-            className="px-6 py-2 w-full max-w-[100px] rounded-full text-white text-black/70 border border-white hover:bg-white hover:text-blue-800 font-bold transition-all duration-200 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+            disabled={isSubmitting}
+            className="px-6 py-2 w-full max-w-[100px] rounded-full text-white text-black/70 border border-white hover:bg-white hover:text-blue-800 font-bold transition-all duration-200 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-20"
           >
             Login
           </button>

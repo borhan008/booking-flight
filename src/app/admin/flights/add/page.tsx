@@ -152,7 +152,7 @@ export default function AddFlight() {
           disabled={isSubmitting}
           className="max-w-[300px] w-full h-13 rounded-full border-2 border-blue-800 text-blue-800 shadow-md hover:bg-blue-800 hover:text-white transition-all disabled:opacity-20"
         >
-          Submit
+          {isSubmitting ? "Loading.." : "Add"}
         </button>
       </form>
     </div>

@@ -39,6 +39,7 @@ export default function BookASeat() {
   const [flight, setFlight] = useState<TFlight | null>(null);
 
   const [seatBookingsIds, setSeatBookingsIds] = useState<string[]>([]);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     const fetchFlight = async () => {
@@ -62,6 +63,7 @@ export default function BookASeat() {
 
   const handleBookNow = async () => {
     try {
+      setDisabled(true);
       const seatBook = await fetch(
         `https://flight-server-six.vercel.app/api/bookings`,
         {
@@ -93,10 +95,13 @@ export default function BookASeat() {
       } else {
         toast.error("Something went wrong");
       }
+    } finally {
+      setDisabled(false);
     }
   };
 
   const handleConfirmSeat = async () => {
+    setDisabled(true);
     const seatBook = await fetch(
       `https://flight-server-six.vercel.app/api/bookings/confirm`,
       {
@@ -125,6 +130,7 @@ export default function BookASeat() {
           "Something went wrong while confirming the seat."
       );
     }
+    setDisabled(false);
   };
 
   useEffect(() => {
@@ -149,10 +155,11 @@ export default function BookASeat() {
                 </h2>
 
                 <button
-                  className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition"
+                  disabled={disabled}
+                  className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition disabled:opacity-20"
                   onClick={handleConfirmSeat}
                 >
-                  Confirm Seats
+                  {disabled ? "Confirming" : "Confirm Seats"}
                 </button>
               </div>
             )}
@@ -234,10 +241,11 @@ export default function BookASeat() {
                 </div>
 
                 <button
-                  className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition"
+                  className="border border-blue-800 text-center- w-[80%] mx-auto text-center p-2 rounded-full block text-blue-800 hover:bg-blue-800 hover:text-white transition disabled:opacity-20"
+                  disabled={disabled}
                   onClick={handleBookNow}
                 >
-                  Book Now
+                  {disabled ? "Booking.." : "Book Now"}
                 </button>
               </div>
             )}

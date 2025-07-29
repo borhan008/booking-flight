@@ -2,11 +2,11 @@
 
 **FlyBook** is a modern flight booking web application built with **Next.js**, providing features for users to explore, book, and manage flights. Admin users can create, update, and delete bookings with route-level protection.
 
-## 🌐 Live Demo
+## Live Demo
 
 🔗 [https://booking-flight-uuqr.vercel.app/](https://booking-flight-uuqr.vercel.app/)
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **Next.js 15+** (App Router)
 - **React Hook Form** – Form handling
@@ -14,7 +14,7 @@
 - **React Toastify** – Notifications
 - **Vercel** – Deployment
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -45,35 +45,35 @@ src/
 └── middleware.ts
 ```
 
-## 🚀 Features
+## Features
 
-### 🧑‍💼 Authentication
+### Authentication
 
 - User Registration
 - User Login
 - Auth state via context
 - Token-based route protection
 
-### ✈️ Flights
+### Flights
 
 - Get all flights from API
 - Filter flights by origin/destination
 - View flight details
 
-### 🧾 Booking
+### Booking
 
 - Book available seats
 - Selecting seats
 - 2 minutes reservation lock
 - Confirm booking view
 
-### 🛠️ Admin Panel
+### Admin Panel
 
 - Create new flights
 - Update flights
 - Manage all bookings
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -89,11 +89,13 @@ npm install
 npm run dev
 ```
 
-## 📌 API Server
+## API Server
 
 - The API [https://flight-server-six.vercel.app/](https://flight-server-six.vercel.app/)
 - The API [documentation](https://documenter.getpostman.com/view/18671311/2sAYBYfAGi#64ebab8d-7177-4781-9b73-22379d9cafa6)
 
-## 📄 License
+### Limitations
 
-This project is licensed under the MIT License.
+- Error and loading states can be managed more effectively to enhance user experience and maintainability.
+- The number of reusable components can be increased to promote a cleaner and more modular codebase.
+- The distinction and usability of server-side and client-side components require further improvement to optimize performance and scalability.
