@@ -56,8 +56,12 @@ export default function Register() {
       setUser(true);
       localStorage.setItem("token", result.data.token);
       router.push("/flights/");
-    } catch (err: any) {
-      toast.error(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      if (err && typeof err === "object" && "message" in err) {
+        toast.error((err as { message: string }).message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

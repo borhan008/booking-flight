@@ -38,7 +38,7 @@ export default function BookASeat() {
   const [counting, setCounting] = useState(0);
   const [flight, setFlight] = useState<TFlight | null>(null);
 
-  const [seatBookingsIds, setSeatBookingsIds] = useState<String[]>([]);
+  const [seatBookingsIds, setSeatBookingsIds] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchFlight = async () => {
@@ -52,7 +52,7 @@ export default function BookASeat() {
     fetchFlight();
   }, []);
 
-  const handleAddSeat = (seatID: String) => {
+  const handleAddSeat = (seatID: string) => {
     if (seatBookingsIds.includes(seatID)) {
       setSeatBookingsIds(seatBookingsIds.filter((s) => s !== seatID));
     } else {
@@ -86,10 +86,6 @@ export default function BookASeat() {
         toast.error(
           seatBookData.message || "Something went wrong while booking the seat."
         );
-        if (seatBookData.message === "jwt expired") {
-          toast.error("Loggging you out.");
-          localStorage.removeItem("token");
-        }
       }
     } catch (error: any) {
       console.log(error);
