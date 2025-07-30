@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 type TSeat = {
   _id: string;
@@ -234,6 +234,7 @@ export default function BookingList() {
             ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 }

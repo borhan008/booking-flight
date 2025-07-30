@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { FaPlaneDeparture, FaPlaneArrival } from "react-icons/fa";
 import { type TFlight } from "@/app/utils/types";
 
@@ -106,6 +106,7 @@ export default function AdminFlights() {
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 type FormValues = {
   airline: string;
@@ -176,6 +176,7 @@ export default function UpdateFlight() {
           {isSubmitting ? "Loading" : "Update"}
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

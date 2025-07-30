@@ -10,7 +10,7 @@ import {
   FaDollarSign,
   FaChair,
 } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 type TSeat = {
   _id: string;
@@ -81,9 +81,11 @@ export default function BookASeat() {
 
       const seatBookData = await seatBook.json();
       if (seatBookData.ok) {
-        toast.success("Seat booked, confirm within 2 minutes.");
         setCountDown(true);
         setCounting(120);
+        toast.success("Seat booked, confirm within 2 minutes.", {
+          toastId: "successBooking",
+        });
       } else {
         toast.error(
           seatBookData.message || "Something went wrong while booking the seat."
@@ -145,6 +147,7 @@ export default function BookASeat() {
 
   return (
     <main className="min-h-screen  ">
+      <ToastContainer />
       {countDown ? (
         <section className="max-w-xl mx-auto py-16  ">
           <div className="bg-white rounded-xl shadow-md max-w-lg w-full overflow-hidden py-12 border">

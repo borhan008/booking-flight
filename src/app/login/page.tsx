@@ -27,7 +27,7 @@ export default function Login() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      router.push("/flights");
+      router.replace("/flights");
     }
   }, []);
   const onSubmit = async (data: FieldValues) => {
@@ -55,7 +55,7 @@ export default function Login() {
       };`;
 
       localStorage.setItem("token", result.data.token);
-      router.push("/flights/");
+      router.replace("/flights/");
     } catch (err: unknown) {
       if (err && typeof err === "object" && "message" in err) {
         toast.error((err as { message: string }).message);
